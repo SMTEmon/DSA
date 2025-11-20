@@ -32,6 +32,7 @@ public class DLL {
         }
 
         current.next = newNode;
+        newNode.prev = current;
 
     }
 
@@ -42,21 +43,73 @@ public class DLL {
     }
 
     public static void deleteFirst(int value) {
+
+        if (head == null) {
+            System.err.println("List is empty.");
+            return;
+        }
+
         DLL current = head;
+
+        if (head.value == value) {
+            if (head.next != null)
+                head.next.prev = null;
+            head = head.next;
+            return;
+        }
 
         while (current != null) {
             if (current.value == value) {
-                current.prev.next = current.next;
+
+                if (current.next != null) {
+                    current.prev.next = current.next;
+                    current.next.prev = current.prev;
+                } else {
+                    current.prev.next = null;
+                }
+
+                return;
             }
+            current = current.next;
         }
         System.err.println("Node does not exist");
     }
 
+    // 1 2 3 4 {5}
+
     public static void insertAt(int index, int value) {
         if (head == null) {
-            System.out.println("");
+            System.err.println("Linklist was empty. Added the value.");
+            add(value);
             return;
         }
+
+        DLL newNode = new DLL(value);
+        DLL current = head;
+
+        if (index == 0) {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+            return;
+        }
+
+        for (int i = 0; i < index - 1; i++) {
+            current = current.next;
+            if (current == null) {
+                System.err.println("Index out of bounds. Adding the value to the end.");
+                add(value);
+                return;
+            }
+        }
+
+        if (current.next != null)
+            current.next.prev = newNode;
+
+        newNode.next = current.next;
+        current.next = newNode;
+
+        newNode.prev = current;
 
     }
 }
