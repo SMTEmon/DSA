@@ -75,8 +75,6 @@ public class DLL {
         System.err.println("Node does not exist");
     }
 
-    // 1 2 3 4 {5}
-
     public static void insertAt(int index, int value) {
         if (head == null) {
             System.err.println("Linklist was empty. Added the value.");
