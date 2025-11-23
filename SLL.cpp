@@ -20,6 +20,11 @@ void insertAtHead(int val)
 
 void insertAtTail(int val)
 {
+    if (head == nullptr)
+    {
+        insertAtHead(val);
+        return;
+    }
     Node *cur = head;
     while (cur->next != nullptr)
     {
@@ -36,11 +41,12 @@ void insertAfter(int refval, int val)
     bool found = false;
     while (cur->next != nullptr && !found)
     {
-        cur = cur->next;
         if (cur->data == refval)
         {
             found = true;
+            break;
         }
+        cur = cur->next;
     }
     Node *newNode = new Node();
     newNode->data = val;
@@ -84,11 +90,13 @@ void update(int oldVal, int newVal)
     bool found = false;
     while (cur->next != nullptr && !found)
     {
-        cur = cur->next;
+
         if (cur->data == oldVal)
         {
             found = true;
+            break;
         }
+        cur = cur->next;
     }
 
     if (found)
@@ -101,20 +109,29 @@ void deleteVal(int val)
 {
     Node *cur = head;
 
+    if (cur->data == val)
+    {
+        head = head->next;
+        free(cur);
+        return;
+    }
+
     bool found = false;
     while (cur->next != nullptr && !found)
     {
-        cur = cur->next;
         if (cur->next->data == val)
         {
             found = true;
+            break;
         }
+        cur = cur->next;
     }
 
     if (found)
     {
+        Node *temp = cur->next;
         cur->next = cur->next->next;
-        free(cur);
+        free(temp);
     }
     else
         cout << "Not found" << "\n";
@@ -122,9 +139,10 @@ void deleteVal(int val)
 
 int main()
 {
-    insertAtHead(10);
+    insertAtTail(10);
     insertAtTail(20);
     insertAtTail(30);
+    deleteVal(40);
 
     display();
 }
