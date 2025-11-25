@@ -1,51 +1,72 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-struct Node{
+struct Node
+{
     int data;
-    Node* next = nullptr;
+    Node *next = nullptr;
 };
 
-Node* head = nullptr;
+Node *head = nullptr;
 
-void insertAtTail(int val){
+void insertAtTail(int val)
+{
 
-    Node* newNode = new Node();
+    Node *newNode = new Node();
 
-    if (head == nullptr){
+    if (head == nullptr)
+    {
         head = newNode;
-        head ->next = head;
+        head->data = val;
+        head->next = head;
         return;
     }
 
-    Node* cur = head;
-    while (cur->next != head){
+    Node *cur = head;
+    while (cur->next != head)
+    {
         cur = cur->next;
     }
+
     newNode->data = val;
     newNode->next = head;
     cur->next = newNode;
 }
 
-void insertAfter(int refval, int val){
-    Node* cur = head;
+void insertAfter(int refval, int val)
+{
+    Node *cur = head;
     bool found = false;
-    while (cur->next != head && !found){
-        cur = cur->next;
-        if (cur->data == refval){
+    while (cur->next != head && !found)
+    {
+        if (cur->data == refval)
+        {
             found = true;
+            break;
         }
+        cur = cur->next;
     }
-    Node* newNode = new Node();
+
+    if (cur->data == refval)
+        found = true;
+
+    if (!found)
+    {
+        cout << "Not found! Inserting at Tail." << "\n";
+    }
+
+    Node *newNode = new Node();
     newNode->data = val;
     newNode->next = cur->next;
     cur->next = newNode;
 }
 
-void display(){
-    Node* cur = head;
-    while (cur->next != head){
+void display()
+{
+    Node *cur = head;
+    while (cur->next != head)
+    {
         cout << cur->data << " ";
         cur = cur->next;
     }
@@ -53,71 +74,98 @@ void display(){
     cout << "\n";
 }
 
-bool search(Node* head, int key){
-    Node* cur = head;
+bool search(int key)
+{
+    Node *cur = head;
 
     bool found = false;
-    while (cur->next != head && !found){
-        cur = cur->next;
-        if (cur->data == key){
+    while (!found)
+    {
+        if (cur->data == key)
+        {
             found = true;
+            break;
         }
+        if (cur->next == head)
+            break;
+
+        cur = cur->next;
     }
 
     return found;
 }
 
-void update (Node* head, int oldVal, int newVal){
-    Node* cur = head;
+void update(int oldVal, int newVal)
+{
+    Node *cur = head;
 
     bool found = false;
-    while (cur->next != head && !found){
-        cur = cur->next;
-        if (cur->data == oldVal){
+    while (!found)
+    {
+        if (cur->data == oldVal)
+        {
             found = true;
+            break;
         }
+        if (cur->next == head)
+            break;
+
+        cur = cur->next;
     }
 
-    if (found) cur->data = newVal;
-    else cout<< "Not found" <<"\n";
+    if (found)
+        cur->data = newVal;
+    else
+        cout << "Not found" << "\n";
 }
 
-void deleteVal(Node* head, int val){
-    Node* cur = head;
+void deleteVal(int val)
+{
+    Node *cur = head;
 
-    if (cur == head && cur->data == val){
-            Node* temp = head->next;
-            while (temp != head){
-                temp = temp->next;
-            }
-            temp->next = cur->next;
-            free(cur);
-            return;
+    if (cur == head && cur->data == val)
+    {
+        Node *temp = head->next;
+        while (temp->next != head)
+        {
+            temp = temp->next;
         }
-
-    bool found = false;
-    while (cur->next != head && !found){
-        cur = cur->next;
-        if (cur->next->data == val){
-            found = true;
-        }
-    }
-
-    if (found) {
-        cur->next = cur->next->next;
+        temp->next = cur->next;
+        head = head->next;
         free(cur);
+        return;
     }
-    
-    else cout<< "Not found" <<"\n";
+
+    bool found = false;
+    while (cur->next != head && !found)
+    {
+        if (cur->next->data == val)
+        {
+            found = true;
+            break;
+        }
+        cur = cur->next;
+    }
+
+    if (found)
+    {
+        Node *temp = cur->next;
+        cur->next = cur->next->next;
+        free(temp);
+    }
+
+    else
+        cout << "Not found" << "\n";
 }
 
-
-
-
-int main(){
+int main()
+{
     insertAtTail(20);
+    insertAtTail(25);
     insertAtTail(30);
+    insertAtTail(40);
+    // update(20, 22);
+    deleteVal(40);
 
     display();
-
 }

@@ -71,13 +71,17 @@ bool search(int key)
     Node *cur = head;
 
     bool found = false;
-    while (cur->next != nullptr && !found)
+    while (!found)
     {
-        cur = cur->next;
         if (cur->data == key)
         {
             found = true;
+            break;
         }
+        if (cur->next == nullptr)
+            break;
+
+        cur = cur->next;
     }
 
     return found;
@@ -143,6 +147,8 @@ int main()
     insertAtTail(20);
     insertAtTail(30);
     deleteVal(40);
+    cout << search(30);
 
     display();
+    return 0;
 }
