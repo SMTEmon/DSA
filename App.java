@@ -1,3 +1,4 @@
+
 public class App {
     public static void main(String[] args) {
         // Add elements to the linked list
