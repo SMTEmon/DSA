@@ -1,3 +1,5 @@
+package LinkedList;
+
 public class DLL {
 
     static DLL head = null;

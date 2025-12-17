@@ -1,3 +1,5 @@
+package LinkedList;
+
 public class SLL {
 
     static SLL head = null;
