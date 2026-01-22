@@ -152,3 +152,22 @@ public:
         return root;
     }
 };
+
+int main()
+{
+    // Quick Test
+    MH h(10);
+    h.insertKey(10);
+    h.insertKey(20);
+    h.insertKey(15);
+    h.insertKey(40);
+    h.insertKey(50);
+
+    // Heap: 50, 40, 15, 10, 20
+    std::cout << "Max: " << h.getMax() << "\n";
+
+    h.deleteKey(0);
+
+    std::cout << "Max after delete: " << h.getMax() << "\n";
+    return 0;
+}
