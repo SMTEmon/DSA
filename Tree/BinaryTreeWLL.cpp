@@ -58,6 +58,7 @@ public:
         {
             search(currentNode->rightNode, val);
         }
+        return nullptr;
     }
 
     static int getDepth(Node *currentNode)
@@ -90,6 +91,45 @@ public:
             if (current->rightNode != nullptr)
                 q.push(current->rightNode);
         }
+    }
+
+    static Node* findLargest(Node* root){
+        if (root->rightNode == nullptr) return root;
+
+        return findLargest(root->rightNode);
+    }
+
+    static Node* findSmallest(Node* root){
+        if (root->leftNode == nullptr) return root;
+
+        return findSmallest(Node->leftNode);
+    }
+
+
+
+    static Node* deleteTree(Node *root, int value){
+        if (root == nullptr) return root;
+        if (root->val < value) {
+            root->leftNode = deleteTree(root->leftNode , value);
+        }
+        else if (root->val > value){
+            root->rightNode = deleteTree(root->rightNode, value);
+        }
+        else{
+            if (root->leftNode && root->rightNode){
+                Node *temp = findSmallest(root -> rightNode);
+                root->val = temp->val;
+                delete temp;
+            }
+            else{
+                Node *temp = root;
+                if (root->leftNode) root = root->leftNode;
+                else if (root->rightNode) root = root->rightNode; 
+                delete temp;
+            }
+        }
+        return root;
+
     }
 };
 
