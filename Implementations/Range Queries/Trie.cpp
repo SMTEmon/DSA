@@ -73,9 +73,9 @@ public:
             {
                 // if (curr->children[c - 'a'] == nullptr)
                 //     return false;
+                curr = curr->children[c - 'a'];
                 if (curr->isLeaf)
                     cnt++;
-                curr = curr->children[c - 'a'];
             }
 
             return cnt;
