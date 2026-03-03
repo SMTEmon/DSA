@@ -5,6 +5,46 @@ using namespace std;
 class GraphwAL
 {
     vector<vector<int>> adj_Nodes;
+    int timer;
+
+    void findBridgesAndArticulations(int u, int p, vector<int> &disc, vector<int> &low,
+                                     vector<bool> &visited, vector<pair<int, int>> &bridges,
+                                     set<int> &articulations)
+    {
+        visited[u] = true;
+        disc[u] = low[u] = ++timer;
+        int children = 0;
+
+        for (int v : adj_Nodes[u])
+        {
+            if (v == p)
+                continue;
+            if (visited[v])
+            {
+                low[u] = min(low[u], disc[v]);
+            }
+            else
+            {
+                children++;
+                findBridgesAndArticulations(v, u, disc, low, visited, bridges, articulations);
+                low[u] = min(low[u], low[v]);
+
+                if (low[v] > disc[u])
+                {
+                    bridges.push_back({u, v});
+                }
+
+                if (p != -1 && low[v] >= disc[u])
+                {
+                    articulations.insert(u);
+                }
+            }
+        }
+        if (p == -1 && children > 1)
+        {
+            articulations.insert(u);
+        }
+    }
 
     void DFSUtil(int curr, vector<bool> &visited)
     {
@@ -120,6 +160,33 @@ public:
             }
         }
 
+        cout << "\n";
+    }
+
+    void findBridgesAndCutVertices()
+    {
+        int n = adj_Nodes.size();
+        vector<int> disc(n, -1), low(n, -1);
+        vector<bool> visited(n, false);
+        vector<pair<int, int>> bridges;
+        set<int> articulations;
+        timer = 0;
+
+        for (int i = 0; i < n; i++)
+        {
+            if (!visited[i])
+            {
+                findBridgesAndArticulations(i, -1, disc, low, visited, bridges, articulations);
+            }
+        }
+
+        cout << "Bridges:\n";
+        for (auto &b : bridges)
+            cout << b.first << " -- " << b.second << "\n";
+
+        cout << "Cut Vertices (Articulation Points):\n";
+        for (int a : articulations)
+            cout << a << " ";
         cout << "\n";
     }
 };

@@ -69,11 +69,9 @@ int query(int node, int l, int r, int ql, int qr)
     }
 
     // If the query overlaps both children (Page 4 logic)
-    int lql = ql, lqr = lr; // left node sub query
-    int rql = rl, rqr = qr; // right node sub query
 
-    int lresult = query(leftNode, ll, lr, lql, lqr);
-    int rresult = query(rightNode, rl, rr, rql, rqr);
+    int lresult = query(leftNode, ll, lr, ql, lr);
+    int rresult = query(rightNode, rl, rr, rl, qr);
 
     return getGCD(lresult, rresult);
 }

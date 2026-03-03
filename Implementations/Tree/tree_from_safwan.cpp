@@ -42,7 +42,7 @@ public:
         return (rightIndex < capacity) ? tree[rightIndex] : -1;
     }
     
-    int getParent(int childIndex) {
+    int getParent(int childInde`x) {
         if (childIndex == 0) return -1;
         return tree[(childIndex - 1) / 2];
     }
