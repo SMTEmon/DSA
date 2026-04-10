@@ -59,7 +59,7 @@ public:
         }
     }
 
-    void heapify(int idx)
+    void heapify(int idx) // Heapify Down
     {
         int largest_idx = idx;
 

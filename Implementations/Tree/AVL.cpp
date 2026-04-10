@@ -34,7 +34,7 @@ private:
 
     void updateHeight(Node *current)
     {
-        if (!current)
+        if (current)
             current->height = 1 + std::max(getHeight(current->left), getHeight(current->right));
     }
 
@@ -58,17 +58,17 @@ private:
 
         if (balance > 1 && val < currentNode->left->val)
         {
-            rightRotate(currentNode);
+            rightRotate(currentNode); // LL
             return currentNode->parent;
         }
         if (balance < -1 && val > currentNode->right->val)
         {
-            leftRotate(currentNode);
+            leftRotate(currentNode); // RR
             return currentNode->parent;
         }
         if (balance > 1 && val > currentNode->left->val)
         {
-            leftRotate(currentNode->left);
+            leftRotate(currentNode->left); 
             rightRotate(currentNode);
             return currentNode->parent;
         }
@@ -83,7 +83,7 @@ private:
     }
 
 public:
-    void leftRotate(Node *node)
+    void leftRotate(Node *node) // literally left rotate (root moves left)/ for RR on slides
     {
         if (node->right == nullptr)
             return;
