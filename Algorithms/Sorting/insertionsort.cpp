@@ -11,11 +11,13 @@ void insertionSort(std::vector<int> &vec, std::function<bool(int, int)> comparat
             {
                 std::swap(vec[j - 1], vec[j]);
             }
+            else
+                break;
         }
     }
 }
 
-void printVector(std::vector<int> vec)
+void printVector(std::vector<int> &vec)
 {
     int sizeOfVector = vec.size();
     for (int i = 0; i < sizeOfVector; i++)
