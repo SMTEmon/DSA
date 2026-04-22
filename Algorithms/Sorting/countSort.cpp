@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 
+// Can't pass function as args since we are not directly comparing anything, skill issue
+
 std::vector<int> countSort(std::vector<int> vec)
 {
 
