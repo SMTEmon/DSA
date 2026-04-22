@@ -46,6 +46,6 @@ int main()
     printVector(v);
 
     bubblesort(v, [](int a, int b)
-               { return abs(a) > abs(b); });
+               { return abs(a) < abs(b); });
     printVector(v);
 }

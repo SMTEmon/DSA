@@ -43,6 +43,6 @@ int main()
     printVector(v);
 
     insertionSort(v, [](int a, int b)
-                  { return abs(a) > abs(b); });
+                  { return abs(a) < abs(b); });
     printVector(v);
 }
