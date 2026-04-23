@@ -1,5 +1,8 @@
 #include <bits/stdc++.h>
 
+// Same issue with counting sort, we are just using counting sort on this, with diff config
+// Can't implement function passes in any way I know for now
+
 int getMax(std::vector<int> vec)
 {
     int maxNow = INT32_MIN;
