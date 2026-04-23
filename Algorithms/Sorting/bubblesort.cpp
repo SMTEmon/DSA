@@ -8,13 +8,19 @@ void bubblesort(std::vector<int> &vec, std::function<bool(int, int)> comparator)
 
     int sizeOfOperation = vec.size() - 1; // on how many we will operate
     // -1 cus we plan to compair 1 more preceding value ig
+
+    bool swapped; // plan to stop if nothing is swapped for 1 run
+
     while (sizeOfOperation > 0)
     {
-
+        swapped = false;
         for (int i = 0; i < sizeOfOperation; i++)
         {
             if (comparator(vec[i], vec[i + 1]))
+            {
                 std::swap(vec[i], vec[i + 1]);
+                swapped = true;
+            }
         }
         sizeOfOperation--;
     }
