@@ -2,7 +2,7 @@
 
 // Can't pass function as args since we are not directly comparing anything, skill issue
 
-std::vector<int> countSort(std::vector<int> vec)
+void countSort(std::vector<int> &vec)
 {
 
     // min max
@@ -44,7 +44,7 @@ std::vector<int> countSort(std::vector<int> vec)
         result_vec[--count[vec[i] + offset]] = vec[i];
     }
 
-    return result_vec;
+    vec = result_vec;
 }
 
 void printVector(std::vector<int> &vec)
@@ -60,6 +60,6 @@ void printVector(std::vector<int> &vec)
 int main()
 {
     std::vector<int> v = {6, 3, -3, 5, 9, 2};
-    std::vector<int> res = countSort(v);
-    printVector(res);
+    countSort(v);
+    printVector(v);
 }
