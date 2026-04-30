@@ -79,6 +79,34 @@ void countSort(std::vector<int> &vec, int idx)
     vec = result_vec;
 }
 
+void countSortSlide(std::vector<int> &arr, int n, int exp)
+{
+
+    // Init Output Array
+    std::vector<int> output(n);
+    std::vector<int> count(10, 0);
+    int i;
+
+    // Store count
+    for (i = 0; i < n; i++)
+    {
+        count[(arr[i] / exp) % 10]++;
+    }
+
+    // Prefix Sum Count
+    for (i = 1; i < n; i++)
+    {
+        count[i] += count[i - 1];
+    }
+
+    // Output gen
+    for (i = n - 1; i >= 0; i--)
+    {
+        output[--count[(arr[i] / exp) % 10]] = arr[i];
+    }
+    arr = output;
+}
+
 void radixSort(std::vector<int> &vec)
 {
     int maxDigitCount = getMaxDigitCount(getMax(vec));
