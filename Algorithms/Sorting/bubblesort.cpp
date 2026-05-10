@@ -14,6 +14,13 @@ void bubblesort(std::vector<int> &vec, std::function<bool(int, int)> comparator)
     while (sizeOfOperation > 0)
     {
         swapped = false;
+
+        //        same as for (i...){
+        //            for(j...){
+        //                ...
+        //            }
+        //        }
+
         for (int i = 0; i < sizeOfOperation; i++)
         {
             if (comparator(vec[i], vec[i + 1]))
