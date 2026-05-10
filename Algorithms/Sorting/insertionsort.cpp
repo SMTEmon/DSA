@@ -3,7 +3,7 @@
 void insertionSort(std::vector<int> &vec, std::function<bool(int, int)> comparator)
 {
     size_t sizeOfVector = vec.size();
-    for (int i = 1; i < sizeOfVector; i++)
+    for (int i = 1; i < sizeOfVector; i++) // start from 1 cus assuming first 1th element is sorted
     {
         for (int j = i; j > 0; j--)
         {
@@ -31,7 +31,7 @@ int main()
 {
     std::vector<int> v = {6, 3, -3, 5, 9, 2};
     insertionSort(v, [](int a, int b)
-                  { return a > b; });
+                  { return a > b; }); // it will only switch if this is true, so its storing its inverse
     printVector(v);
 
     insertionSort(v, [](int a, int b)
