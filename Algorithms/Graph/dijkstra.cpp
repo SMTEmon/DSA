@@ -39,11 +39,12 @@ public:
 
             for (pair<int, int> nei : adj[node.second])
             {
-                if (!visited[nei.second])
-                    pq.push(nei);
-                if (dis[nei.second] > (dis[node.second] + nei.first))
+
+                if (dis[node.second] != INT_MAX && dis[nei.second] > (dis[node.second] + nei.first))
                 {
                     dis[nei.second] = dis[node.second] + nei.first;
+                    if (!visited[nei.second])
+                        pq.push(make_pair(dis[nei.second], nei.second));
                 }
             }
         }
