@@ -35,6 +35,8 @@ public:
         {
             pair<int, int> node = pq.top();
             pq.pop();
+            if (visited[node.second])
+                continue;
             visited[node.second] = true;
 
             for (pair<int, int> nei : adj[node.second])
