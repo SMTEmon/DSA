@@ -46,7 +46,7 @@ public:
                 lli weight = edge.first;
                 lli dest = edge.second;
 
-                dis[source][dest] = weight;
+                dis[source][dest] = min(dis[source][dest], weight); // in case theres multiple edges between same sets of vertices
             }
         }
 
