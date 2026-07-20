@@ -56,6 +56,7 @@ public:
                     if (!visited[nei.second])
                     {
                         cost[nei.second] = nei.first;
+                        res += nei.first;
                         pq.push(make_pair(cost[nei.second], nei.second));
                     }
                 }
