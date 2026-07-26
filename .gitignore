@@ -1,5 +1,9 @@
 *.exe
 *.class
+*.out
+a.out
+out/
+bin/
 
 .vscode/
 .idea/
